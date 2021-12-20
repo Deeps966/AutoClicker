@@ -52,6 +52,7 @@ class ClickMouse(threading.Thread):
     def on_click(self,x, y, button, pressed):
         if pressed:
             self.mouseClicks.append({'position': (x,y), 'button': button})
+            print('Your Click is Registered')
 
     def on_press(self,key):
         if key == self.start_stop_key:
