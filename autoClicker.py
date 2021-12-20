@@ -9,7 +9,7 @@ from pynput.keyboard import Listener as KeyboardListener
 class ClickMouse(threading.Thread):
     def __init__(self, delay, button):
         super(ClickMouse, self).__init__()
-        self.start_self.stop_key = KeyCode(char='a')
+        self.start_stop_key = KeyCode(char='a')
         self.stop_key = KeyCode(char='b')
         self.delay = delay
         self.button = button
@@ -41,22 +41,23 @@ class ClickMouse(threading.Thread):
         while self.program_running:
             while self.running:
                 for clickPos in self.mouseClicks:
-                    self.mouse.position = clickPos
-                    self.mouse.click(self.button)
-                    print(clickPos)
-                    if clickPos == self.mouseClicks[self.mouseClicks.__len__() - 1]:
-                        count = 0
-                    else:
-                        count = count + 1
-                    time.sleep(self.delay)
-                    time.sleep(1)
+                    if self.program_running and self.running:
+                        self.mouse.position = clickPos['position']
+                        self.mouse.click(clickPos['button'])
+                        print(clickPos)
+                        if clickPos == self.mouseClicks[self.mouseClicks.__len__() - 1]:
+                            count = 0
+                        else:
+                            count = count + 1
+                        time.sleep(self.delay)
+                        time.sleep(1)
 
     def on_click(self,x, y, button, pressed):
         if pressed:
-            self.mouseClicks.append((x,y))
+            self.mouseClicks.append({'position': (x,y), 'button': button})
 
     def on_press(self,key):
-        if key == self.start_self.stop_key:
+        if key == self.start_stop_key:
             if click_thread.running:
                 click_thread.stop_clicking()
             else:
