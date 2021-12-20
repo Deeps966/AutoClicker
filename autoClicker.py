@@ -22,8 +22,6 @@ class ClickMouse(threading.Thread):
         self.mouse_listener.start()
         self.mouse = Controller()
         self.mouseClicks = []
-        # self.keyboard_listener.join()
-        # self.mouse_listener.join()
 
     def start_clicking(self):
         self.running = True
