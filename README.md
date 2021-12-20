@@ -1,4 +1,4 @@
-# AutoClicker will help to automate your multiple clicks to make it run in a loop
+# AutoClicker will help to automate multiple clicks and it will run in a continuous loop
 
 1. Pass Delay While Creating an Object of Class ClickMouse
 2. Run the python Script
